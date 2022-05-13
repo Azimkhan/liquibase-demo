@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="azimkhan (generated)" id="1652469695232-1">
+        <createSequence sequenceName="reports_id_seq"/>
+    </changeSet>
+    <changeSet author="azimkhan (generated)" id="1652469695232-2">
+        <createTable tableName="reports">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="reports_pk"/>
+            </column>
+            <column name="md5_sum" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sha1_sum" type="VARCHAR(48)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sha2_sum" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="azimkhan (generated)" id="1652469695232-3">
+        <createIndex indexName="reports__index_md5" tableName="reports">
+            <column name="md5_sum"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="azimkhan (generated)" id="1652469695232-4">
+        <createIndex indexName="reports__index_sha1" tableName="reports">
+            <column name="sha1_sum"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="azimkhan (generated)" id="1652469695232-5">
+        <createIndex indexName="reports__index_sha2" tableName="reports">
+            <column name="sha2_sum"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
