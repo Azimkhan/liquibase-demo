@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="sample-data" author="system">
+        <preConditions>
+            <rowCount tableName="object_analysis" expectedRows="0"/>
+        </preConditions>
+        <insert tableName="object_analysis">
+            <column name="status" value="PROCESSING"/>
+            <column name="sha2_sum" value="25d4ad0943a72afab95004e61d539fc013453dc0d6210b0aa543523896656d59"/>
+            <column name="sha1_sum" value="f1db80a2fe94ea65f3af906a77fddff5137d4290"/>
+            <column name="md5_sum" value="8acaf567a13de0de844d7442ee4b3678"/>
+            <column name="create_time" value="2021-05-14 10:30:23"/>
+        </insert>
+        <insert tableName="object_analysis">
+            <column name="status" value="PROCESSING"/>
+            <column name="sha2_sum" value="d2dc5166feb6b9ed64108f45685d23972197cfa9fd8c9a7663247452351c742e"/>
+            <column name="sha1_sum" value="d27a30f9ce6bc9bc69666bbc6e014155caf40714"/>
+            <column name="md5_sum" value="51fc722f160db529ab48f5ce3b24ed57"/>
+            <column name="create_time" value="2021-05-14 09:50:11"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

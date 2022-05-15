@@ -3,39 +3,56 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="azimkhan (generated)" id="1652469695232-1">
-        <createSequence sequenceName="reports_id_seq"/>
-    </changeSet>
-    <changeSet author="azimkhan (generated)" id="1652469695232-2">
-        <createTable tableName="reports">
-            <column autoIncrement="true" name="id" type="SERIAL">
-                <constraints primaryKey="true" primaryKeyName="reports_pk"/>
-            </column>
-            <column name="md5_sum" type="VARCHAR(32)">
+
+    <changeSet id="1-1" author="system">
+        <createTable tableName="object_analysis">
+            <column autoIncrement="true" type="serial" name="id"/>
+            <column type="varchar(50)" name="status">
                 <constraints nullable="false"/>
             </column>
-            <column name="sha1_sum" type="VARCHAR(48)">
+            <column type="varchar(64)" name="sha2_sum">
                 <constraints nullable="false"/>
             </column>
-            <column name="sha2_sum" type="VARCHAR(64)">
+            <column type="varchar(48)" name="sha1_sum">
                 <constraints nullable="false"/>
             </column>
-            <column name="create_time" type="DATETIME"/>
+            <column type="varchar(32)" name="md5_sum">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
-    </changeSet>
-    <changeSet author="azimkhan (generated)" id="1652469695232-3">
-        <createIndex indexName="reports__index_md5" tableName="reports">
-            <column name="md5_sum"/>
+        <createIndex tableName="object_analysis" indexName="idx_object_analysis_status">
+            <column name="status"/>
         </createIndex>
-    </changeSet>
-    <changeSet author="azimkhan (generated)" id="1652469695232-4">
-        <createIndex indexName="reports__index_sha1" tableName="reports">
-            <column name="sha1_sum"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="azimkhan (generated)" id="1652469695232-5">
-        <createIndex indexName="reports__index_sha2" tableName="reports">
+        <createIndex tableName="object_analysis" indexName="idx_object_analysis_sha2_sum">
             <column name="sha2_sum"/>
         </createIndex>
+        <createIndex tableName="object_analysis" indexName="idx_object_analysis_sha1_sum">
+            <column name="sha1_sum"/>
+        </createIndex>
+        <createIndex tableName="object_analysis" indexName="idx_object_analysis_md5_sum">
+            <column name="md5_sum"/>
+        </createIndex>
+        <rollback>
+            <dropTable tableName="object_analysis"/>
+        </rollback>
     </changeSet>
+
+    <changeSet id="1-2" author="system">
+        <addColumn tableName="object_analysis">
+            <column name="create_time" type="timestamp"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="object_analysis" columnName="create_time"/>
+        </rollback>
+    </changeSet>
+
+    <include file="db/changelog/sample-data.xml"/>
+
+    <changeSet id="2-1" author="system">
+        <createTable tableName="dyn_analysis">
+            <column name="object_analysis_id" type="int"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
